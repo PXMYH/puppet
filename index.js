@@ -25,7 +25,7 @@ closeBrowser = async (browser) => {
   return browser.close();
 };
 
-login = async (url) => {
+wheelSpin = async (url) => {
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
 
@@ -48,10 +48,6 @@ login = async (url) => {
 
   await page.evaluate((pollWrapperSelector) => {
     let elements = $(pollWrapperSelector).toArray();
-    // let elements = $(
-    //   '#PollDashboardForm > div.poll-ui-wrapper > label.poll-label'
-    // ).toArray();
-    console.log('elements is ', elements);
     if (elements.length != 0) {
       $(elements[0]).click(); // click the first element
     }
@@ -73,6 +69,7 @@ login = async (url) => {
   browser.close();
 };
 
+// run the main automation
 (async () => {
-  await login('https://mintvine.com/');
+  await wheelSpin('https://mintvine.com/');
 })();
