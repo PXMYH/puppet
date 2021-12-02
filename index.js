@@ -1,6 +1,14 @@
 const puppeteer = require('puppeteer');
 const C = require('./constants');
 
+//////////////////////////// TODO /////////////////////////////////////
+//
+// * randomize poll answer selection
+// * support multi-account for max profit
+// * randomize wait time to simulate more natural user flow
+// * set up schedule to run the script
+//////////////////////////////////////////////////////////////////////
+
 // variable declaration
 const loginLinkSelector =
   'body > div.container-fliud > div.dark > header > div:nth-child(2) > div.br-main-menu.float-right > ul > li:nth-child(2)';
@@ -88,6 +96,6 @@ wheelSpin = async (url) => {
 };
 
 // run the main automation
-// (async () => {
-//   await wheelSpin('https://mintvine.com/');
-// })();
+(async () => {
+  await wheelSpin('https://mintvine.com/');
+})();
