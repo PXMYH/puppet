@@ -44,6 +44,7 @@ jobs:
           tree node_modules/puppeteer/.local-chromium
           cd node_modules/puppeteer/.local-chromium
           pwd
+          ls /github/workspace/node_modules
           tree /github/workspace/node_modules/puppeteer/.local-chromium
 
       - name: run wheel spin
