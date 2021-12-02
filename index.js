@@ -40,7 +40,7 @@ startBrowser = async () => {
     headless: true,
     dumpio: true,
     executablePath: '/snap/bin/chromium' // this is temporary, should differentiate the running environment
-    args: [`--no-sandbox`, `--disable-setuid-sandbox`],
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
   page.setUserAgent(
