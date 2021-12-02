@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-const C = require('./constants');
 
 //////////////////////////// TODO /////////////////////////////////////
 //
@@ -29,7 +28,10 @@ const datetime =
   currentDate.getHours().toString() +
   currentDate.getMinutes().toString();
 const screenshotName = `mintvine_${datetime}.png`;
-console.log('screenshotName = ', screenshotName);
+
+// get login username and password from environment variable
+const loginUsername = process.env.LOGIN_USERNAME;
+const loginPassword = process.env.LOGIN_PASSWORD;
 
 startBrowser = async () => {
   const browser = await puppeteer.launch({ headless: false, dumpio: true });
@@ -58,9 +60,9 @@ wheelSpin = async (url) => {
   await page.click(loginLinkSelector);
   await page.waitForTimeout(2000);
   await page.click(usernameSelector);
-  await page.keyboard.type(C.username);
+  await page.keyboard.type(loginUsername);
   await page.click(passwordSelector);
-  await page.keyboard.type(C.password);
+  await page.keyboard.type(loginPassword);
   await page.click(loginSubmitSelector);
   console.log('Submitted login info');
   await page.waitForNavigation();
