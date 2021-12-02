@@ -18,7 +18,7 @@ closeBrowser = async (browser) => {
   return browser.close();
 };
 
-playTest = async (url) => {
+login = async (url) => {
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
   await page.goto(url);
@@ -37,6 +37,6 @@ playTest = async (url) => {
 };
 
 (async () => {
-  await playTest('https://mintvine.com/');
+  await login('https://mintvine.com/');
   process.exit(1);
 })();
