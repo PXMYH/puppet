@@ -35,6 +35,11 @@ jobs:
           sudo apt-get install -y libgbm1 libgbm-dev
           sudo apt-get install chromium-browser
 
+      - name: verify
+        run: |
+          sudo ldd chrome | grep not
+          which chrome
+          
       - name: run wheel spin
         uses: borales/actions-yarn@v2.3.0
         with:
