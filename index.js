@@ -39,12 +39,7 @@ startBrowser = async () => {
   const browser = await puppeteer.launch({
     headless: true,
     dumpio: true,
-    args: [
-      `--no-sandbox`,
-      `--disable-setuid-sandbox`,
-      `--disable-extensions-except=${extensionPath}`,
-      `--load-extension=${extensionPath}`,
-    ],
+    args: [`--no-sandbox`, `--disable-setuid-sandbox`],
   });
   const page = await browser.newPage();
   page.setUserAgent(
