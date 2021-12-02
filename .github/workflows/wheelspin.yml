@@ -37,7 +37,7 @@ jobs:
 
       - name: verify
         run: |
-          sudo ldd chromium | grep not
+          # sudo ldd chromium | grep not
           which chromium
           
       - name: run wheel spin
