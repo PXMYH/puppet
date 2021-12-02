@@ -13,7 +13,15 @@ const pollWrapperSelector =
   '#PollDashboardForm > div.poll-ui-wrapper > label.poll-label';
 const pollAnswerSubmitSelector =
   '#PollDashboardForm > input.submit-poll.d-none.d-sm-flex.btn.btn-outline-primary';
-const screenshotName = 'mintvine.png';
+const currentDate = new Date();
+const datetime =
+  currentDate.getFullYear().toString() +
+  currentDate.getMonth().toString() +
+  currentDate.getDay().toString() +
+  currentDate.getHours().toString() +
+  currentDate.getMinutes().toString();
+const screenshotName = `mintvine_${datetime}.png`;
+console.log('screenshotName = ', screenshotName);
 
 startBrowser = async () => {
   const browser = await puppeteer.launch({ headless: false, dumpio: true });
@@ -80,6 +88,6 @@ wheelSpin = async (url) => {
 };
 
 // run the main automation
-(async () => {
-  await wheelSpin('https://mintvine.com/');
-})();
+// (async () => {
+//   await wheelSpin('https://mintvine.com/');
+// })();
