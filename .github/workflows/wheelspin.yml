@@ -37,8 +37,8 @@ jobs:
 
       - name: verify
         run: |
-          sudo ldd chrome | grep not
-          which chrome
+          sudo ldd chromium | grep not
+          which chromium
           
       - name: run wheel spin
         uses: borales/actions-yarn@v2.3.0
