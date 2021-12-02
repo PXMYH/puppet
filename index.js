@@ -36,7 +36,14 @@ const loginPassword = process.env.LOGIN_PASSWORD;
 startBrowser = async () => {
   // TODO: improvement: differentiate the environment where the script is run
   // if in local, headless set to false, otherwise set to true
-  const browser = await puppeteer.launch({ headless: true, dumpio: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    dumpio: true,
+    args: [
+      `--no-sandbox``--disable-setuid-sandbox``--disable-extensions-except=${extensionPath}`,
+      `--load-extension=${extensionPath}`,
+    ],
+  });
   const page = await browser.newPage();
   page.setUserAgent(
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4182.0 Safari/537.36'
