@@ -3,10 +3,10 @@ const C = require('./constants');
 
 //////////////////////////// TODO /////////////////////////////////////
 //
-// * randomize poll answer selection
-// * support multi-account for max profit
+// * [Done] randomize poll answer selection
 // * randomize wait time to simulate more natural user flow
 // * set up schedule to run the script
+// * support multi-account for max profit
 //////////////////////////////////////////////////////////////////////
 
 // variable declaration
@@ -44,6 +44,10 @@ closeBrowser = async (browser) => {
   return browser.close();
 };
 
+getRandomArbitrary = (min, max) => {
+  return Math.random() * (max - min) + min;
+};
+
 wheelSpin = async (url) => {
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
@@ -70,7 +74,11 @@ wheelSpin = async (url) => {
       '#PollDashboardForm > div.poll-ui-wrapper > label.poll-label';
     let elements = $(pollWrapperSelector).toArray();
     if (elements.length != 0) {
-      $(elements[0]).click(); // click the first element
+      // randomly choose a number between 0 and elements.length
+      const randomOption = Math.random() * (elements.length - 0) + 0;
+      const option = Math.floor(randomOption); // we need to floor it to round to nearest integer
+      console.log('choosing option ', option);
+      $(elements[option]).click(); // click the first element
     }
 
     // alternative: click each element, just for fun :)
