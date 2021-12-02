@@ -40,7 +40,9 @@ startBrowser = async () => {
     headless: true,
     dumpio: true,
     args: [
-      `--no-sandbox``--disable-setuid-sandbox``--disable-extensions-except=${extensionPath}`,
+      `--no-sandbox`,
+      `--disable-setuid-sandbox`,
+      `--disable-extensions-except=${extensionPath}`,
       `--load-extension=${extensionPath}`,
     ],
   });
