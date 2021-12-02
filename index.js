@@ -39,8 +39,8 @@ startBrowser = async () => {
   const browser = await puppeteer.launch({
     headless: true,
     dumpio: true,
-    executablePath: '/snap/bin/chromium' // this is temporary, should differentiate the running environment
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    executablePath: '/snap/bin/chromium', // this is temporary, should differentiate the running environment
   });
   const page = await browser.newPage();
   page.setUserAgent(
