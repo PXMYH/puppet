@@ -18,6 +18,9 @@ const screenshotName = 'mintvine.png';
 startBrowser = async () => {
   const browser = await puppeteer.launch({ headless: false, dumpio: true });
   const page = await browser.newPage();
+  page.setUserAgent(
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4182.0 Safari/537.36'
+  );
   return { browser, page };
 };
 
@@ -46,7 +49,9 @@ wheelSpin = async (url) => {
   await page.goto(mintvineDashboardUrl, { waitUntil: 'load' });
   console.log('Mintvine dashboard loaded');
 
-  await page.evaluate((pollWrapperSelector) => {
+  await page.evaluate(() => {
+    const pollWrapperSelector =
+      '#PollDashboardForm > div.poll-ui-wrapper > label.poll-label';
     let elements = $(pollWrapperSelector).toArray();
     if (elements.length != 0) {
       $(elements[0]).click(); // click the first element
@@ -58,13 +63,16 @@ wheelSpin = async (url) => {
     //   $(elements[i]).click();
     // }
   });
+  // we wait for 3s for the selection to settle
+  await page
+    .waitForTimeout(3000)
+    .then(() => console.log('Waited 3 seconds for evaluate completion'));
   await page.click(pollAnswerSubmitSelector);
   console.log('Submitted daily poll answer');
 
   // taking a screenshot
   // TODO: set screenshot name with date time
   await page.screenshot({ path: screenshotName, fullPage: true });
-  await page.waitForTimeout(200000000);
 
   browser.close();
 };
