@@ -39,6 +39,7 @@ startBrowser = async () => {
   const browser = await puppeteer.launch({
     headless: true,
     dumpio: true,
+    executablePath: '/snap/bin/chromium' // this is temporary, should differentiate the running environment
     args: [`--no-sandbox`, `--disable-setuid-sandbox`],
   });
   const page = await browser.newPage();
