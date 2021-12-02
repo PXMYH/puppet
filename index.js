@@ -34,7 +34,7 @@ const loginUsername = process.env.LOGIN_USERNAME;
 const loginPassword = process.env.LOGIN_PASSWORD;
 
 startBrowser = async () => {
-  const browser = await puppeteer.launch({ headless: false, dumpio: true });
+  const browser = await puppeteer.launch({ headless: true, dumpio: true });
   const page = await browser.newPage();
   page.setUserAgent(
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4182.0 Safari/537.36'
