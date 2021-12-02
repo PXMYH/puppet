@@ -34,6 +34,8 @@ const loginUsername = process.env.LOGIN_USERNAME;
 const loginPassword = process.env.LOGIN_PASSWORD;
 
 startBrowser = async () => {
+  // TODO: improvement: differentiate the environment where the script is run
+  // if in local, headless set to false, otherwise set to true
   const browser = await puppeteer.launch({ headless: true, dumpio: true });
   const page = await browser.newPage();
   page.setUserAgent(
