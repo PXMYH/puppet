@@ -10,7 +10,7 @@ const mintvineDashboardUrl = 'https://surveys.gobranded.com/users/dashboard';
 const poll_wrapper_selector = '#PollDashboardForm > div.poll-ui-wrapper';
 
 startBrowser = async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
   return { browser, page };
 };
