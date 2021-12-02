@@ -64,6 +64,8 @@ wheelSpin = async (url) => {
     // }
   });
   // we wait for 3s for the selection to settle
+  // TODO: improvement: alternatively, we can wait for a classname poll-checked to appear
+  // it is a better approach since we won't have the flakiness of timeout
   await page
     .waitForTimeout(3000)
     .then(() => console.log('Waited 3 seconds for evaluate completion'));
