@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const os = require('os');
 
 //////////////////////////// TODO /////////////////////////////////////
 //
@@ -36,11 +37,19 @@ const loginPassword = process.env.LOGIN_PASSWORD;
 startBrowser = async () => {
   // TODO: improvement: differentiate the environment where the script is run
   // if in local, headless set to false, otherwise set to true
+  console.log('process.platform = ', process.platform);
+  if (process.platform === 'darwin') {
+    chromeExecutable = '/Applications/Chromium.app/Contents/MacOS/Chromium';
+  } else if (process.platform === 'linux') {
+    chromeExecutable = '/snap/bin/chromium';
+  } else {
+    chromeExecutable = '/usr/bin/chromium';
+  }
   const browser = await puppeteer.launch({
     headless: true,
     dumpio: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    executablePath: '/snap/bin/chromium', // this is temporary, should differentiate the running environment
+    // executablePath: chromeExecutable, // this is temporary, should differentiate the running environment
   });
   const page = await browser.newPage();
   page.setUserAgent(
