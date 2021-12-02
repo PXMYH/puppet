@@ -7,6 +7,7 @@ const PASSWORD_SELECTOR = '#UserPassword';
 const SUBMIT_SELECTOR = '#UserLoginForm > div:nth-child(4) > div > div > input';
 const REDIRECTION_SELECTOR = '#info > a';
 const mintvineDashboardUrl = 'https://surveys.gobranded.com/users/dashboard';
+const poll_wrapper_selector = '#PollDashboardForm > div.poll-ui-wrapper';
 
 startBrowser = async () => {
   const browser = await puppeteer.launch();
@@ -21,22 +22,35 @@ closeBrowser = async (browser) => {
 login = async (url) => {
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
-  await page.goto(url);
+
+  // login
+  await page.goto(url, { waitUntil: 'load' });
+  console.log('Mintvine page loaded');
   await page.click(LOGIN_SELECTOR);
   await page.waitForTimeout(4000);
-  // await page.waitForNavigation();
   await page.click(USERNAME_SELECTOR);
-  console.log('USERNAME_SELECTOR = ', USERNAME_SELECTOR);
   await page.keyboard.type(C.username);
   await page.click(PASSWORD_SELECTOR);
   await page.keyboard.type(C.password);
   await page.click(SUBMIT_SELECTOR);
+  console.log('Submitted login info');
   await page.waitForNavigation();
-  await page.goto(mintvineDashboardUrl);
-  await page.screenshot({ path: 'mintvine.png' });
+
+  // dashboard
+  await page.goto(mintvineDashboardUrl, { waitUntil: 'load' });
+  console.log('Mintvine dashboard loaded');
+  await page.evaluate(() => {
+    // let elements = $(poll_wrapper_selector).toArray();
+    let elements = $('#PollDashboardForm > div.poll-ui-wrapper').toArray();
+    for (i = 0; i < elements.length; i++) {
+      console.log('element is ', elements[i]);
+      // $(elements[i]).click();
+    }
+  });
+  await page.screenshot({ path: 'mintvine.png', fullPage: true });
+  browser.close();
 };
 
 (async () => {
   await login('https://mintvine.com/');
-  process.exit(1);
 })();
