@@ -50,4 +50,4 @@ jobs:
           LOGIN_USERNAME: ${{ secrets[matrix.username] }}
           LOGIN_PASSWORD: ${{ secrets[matrix.password] }}
         run: |
-          yarn start
+          yarn run mintvine
