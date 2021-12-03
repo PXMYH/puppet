@@ -6,7 +6,7 @@ name: Wheel Of Fortune
 on:
   # Triggers daily
   schedule:
-    - cron: '0 22 * * *' #runs at 22:00 UTC everyday (5pm ET)
+    - cron: '0 17 * * *' #runs at 17:00 UTC everyday (12pm ET)
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
