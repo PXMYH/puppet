@@ -53,5 +53,8 @@ jobs:
       #     cmd: start # will run `yarn start` command
 
       - name: run wheel spin
+        env:
+          LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
+          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
         run: |
           yarn start

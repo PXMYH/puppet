@@ -108,6 +108,8 @@ wheelSpin = async (url) => {
   // await page.keyboard.type(loginPassword);
 
   // type in username and password
+  console.log('loginUsername: ', loginUsername);
+  console.log('loginPassword: ', loginPassword);
   await page.type(usernameSelector, loginUsername);
   await page.type(passwordSelector, loginPassword);
 
