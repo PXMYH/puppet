@@ -86,12 +86,31 @@ wheelSpin = async (url) => {
   // login
   await page.goto(url, { waitUntil: 'load' });
   console.log('Mintvine page loaded');
+
+  // bring up login page
+  // TODO: improvement: go to https://surveys.gobranded.com/users/login/ directly
   await page.click(loginLinkSelector);
   await page.waitForTimeout(2000);
-  await page.click(usernameSelector);
-  await page.keyboard.type(loginUsername);
-  await page.click(passwordSelector);
-  await page.keyboard.type(loginPassword);
+
+  // To avoid the following error, we can't use page.keyboard.type()
+  //   /Users/runner/work/puppet/puppet/node_modules/puppeteer/lib/cjs/puppeteer/common/Input.js:222
+  //   for (const char of text) {
+  //                      ^
+  // TypeError: text is not iterable
+  // at Keyboard.type (/Users/runner/work/puppet/puppet/node_modules/puppeteer/lib/cjs/puppeteer/common/Input.js:222:28)
+  // at wheelSpin (/Users/runner/work/puppet/puppet/index.js:92:23)
+  // at processTicksAndRejections (node:internal/process/task_queues:96:5)
+  // at async /Users/runner/work/puppet/puppet/index.js:139:3
+  // error Command failed with exit code 1.
+  // await page.click(usernameSelector);
+  // await page.keyboard.type(loginUsername);
+  // await page.click(passwordSelector);
+  // await page.keyboard.type(loginPassword);
+
+  // type in username and password
+  await page.type(usernameSelector, loginUsername);
+  await page.type(passwordSelector, loginPassword);
+
   await page.click(loginSubmitSelector);
   console.log('Submitted login info');
   await page.waitForNavigation();
