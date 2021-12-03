@@ -5,11 +5,14 @@ const fs = require('fs');
 //
 // * [Done] randomize poll answer selection
 // * randomize wait time to simulate more natural user flow
-// * set up schedule to run the script
+// * [Done] set up schedule to run the script
 // * support multi-account for max profit
 //////////////////////////////////////////////////////////////////////
 
 // variable declaration
+
+const mintvineMainUrl = 'https://mintvine.com/';
+const mintvineLoginPageUrl = 'https://surveys.gobranded.com/users/login/';
 
 const loginLinkSelector =
   'body > div.container-fliud > div.dark > header > div:nth-child(2) > div.br-main-menu.float-right > ul > li:nth-child(2)';
@@ -36,7 +39,6 @@ const loginUsername = process.env.LOGIN_USERNAME;
 const loginPassword = process.env.LOGIN_PASSWORD;
 
 startBrowser = async () => {
-  // TODO: improvement: differentiate the environment where the script is run
   // if in local, headless set to false, otherwise set to true
   let chromeExecutable = '';
   const basePath = './node_modules/puppeteer/.local-chromium';
@@ -62,7 +64,7 @@ startBrowser = async () => {
     headless: true,
     dumpio: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    executablePath: chromeExecutable, // this is temporary, should differentiate the running environment
+    executablePath: chromeExecutable,
   });
   const page = await browser.newPage();
   page.setUserAgent(
@@ -75,10 +77,6 @@ closeBrowser = async (browser) => {
   return browser.close();
 };
 
-getRandomArbitrary = (min, max) => {
-  return Math.random() * (max - min) + min;
-};
-
 wheelSpin = async (url) => {
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
@@ -87,14 +85,7 @@ wheelSpin = async (url) => {
   await page.goto(url, { waitUntil: 'load' });
   console.log('Mintvine page loaded');
 
-  // bring up login page
-  // TODO: improvement: go to https://surveys.gobranded.com/users/login/ directly
-  await page.click(loginLinkSelector);
-  await page.waitForTimeout(2000);
-
   // type in username and password
-  console.log('loginUsername: ', loginUsername);
-  console.log('loginPassword: ', loginPassword);
   await page.type(usernameSelector, loginUsername);
   await page.type(passwordSelector, loginPassword);
 
@@ -134,13 +125,12 @@ wheelSpin = async (url) => {
   console.log('Submitted daily poll answer');
 
   // taking a screenshot
-  // TODO: set screenshot name with date time
   await page.screenshot({ path: screenshotName, fullPage: true });
 
-  browser.close();
+  await closeBrowser(browser);
 };
 
 // run the main automation
 (async () => {
-  await wheelSpin('https://mintvine.com/');
+  await wheelSpin(mintvineLoginPageUrl);
 })();
