@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         username: ['LOGIN_USERNAME1', 'LOGIN_USERNAME2']
-        password: ['LOGIN_PASSWORD1', 'LOGIN_PASSWORD2']
+        password: ['LOGIN_PASSWORD'] # use same password for now, this is because matrix will create jobs for ALL combinations if there are multiple values for password
 
     steps:
       - uses: actions/checkout@v2
