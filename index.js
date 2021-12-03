@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const os = require('os');
+const fs = require('fs');
 
 //////////////////////////// TODO /////////////////////////////////////
 //
@@ -37,19 +37,36 @@ const loginPassword = process.env.LOGIN_PASSWORD;
 startBrowser = async () => {
   // TODO: improvement: differentiate the environment where the script is run
   // if in local, headless set to false, otherwise set to true
-  console.log('process.platform = ', process.platform);
+  let chromeExecutable = '';
+  const basePath = './node_modules/puppeteer/.local-chromium';
+  console.log('currently running in platform: ', process.platform);
+  bundledChromiumFolder = fs.readdirSync(basePath).filter((file) => {
+    return fs.statSync(basePath + '/' + file).isDirectory();
+  });
+  console.log('bundled Chromium Folder is ', bundledChromiumFolder);
   if (process.platform === 'darwin') {
-    chromeExecutable = '/Applications/Chromium.app/Contents/MacOS/Chromium';
+    chromeExecutable =
+      basePath +
+      '/' +
+      bundledChromiumFolder +
+      '/chrome-mac/Chromium.app/Contents/MacOS/Chromium';
   } else if (process.platform === 'linux') {
-    chromeExecutable = '/snap/bin/chromium';
+    // chromeExecutable = '/snap/bin/chromium';
+    // function getDirectories(path) {
+    //   return fs.readdirSync(path).filter(function (file) {
+    //     return fs.statSync(path + '/' + file).isDirectory();
+    //   });
+    // }
+    chromeExecutable = './node_modules/puppeteer/.local-chromium';
   } else {
     chromeExecutable = '/usr/bin/chromium';
   }
+  console.log('to be launched chromeExecutable = ', chromeExecutable);
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     dumpio: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    // executablePath: chromeExecutable, // this is temporary, should differentiate the running environment
+    executablePath: chromeExecutable, // this is temporary, should differentiate the running environment
   });
   const page = await browser.newPage();
   page.setUserAgent(
