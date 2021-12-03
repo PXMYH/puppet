@@ -1,6 +1,14 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs');
 
-const lcUrl = 'https://leetcode.com/';
+const lcLoginUrl = 'https://leetcode.com/accounts/login/';
+const usernameSelector = '#id_login';
+const passwordSelector = '#id_password';
+const loginSubmitSelector = '#signin_btn > div';
+
+// get login username and password from environment variable
+const loginUsername = process.env.LOGIN_USERNAME;
+const loginPassword = process.env.LOGIN_PASSWORD;
 
 startBrowser = async () => {
   // if in local, headless set to false, otherwise set to true
@@ -25,7 +33,7 @@ startBrowser = async () => {
   }
   console.log('to be launched chromeExecutable = ', chromeExecutable);
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     dumpio: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
     executablePath: chromeExecutable,
@@ -49,10 +57,19 @@ getCoin = async (url) => {
   await page.goto(url, { waitUntil: 'load' });
   console.log('LC page loaded');
 
+  // type in username and password
+  await page.type(usernameSelector, loginUsername);
+  await page.type(passwordSelector, loginPassword);
+
+  // await page.click(loginSubmitSelector);
+  await page.keyboard.press('Enter');
+  console.log('Submitted login info');
+  await page.waitForNavigation();
+
   await closeBrowser(browser);
 };
 
 // run the main automation
 (async () => {
-  await getCoin(lcUrl);
+  await getCoin(lcLoginUrl);
 })();
