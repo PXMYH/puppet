@@ -59,7 +59,7 @@ startBrowser = async () => {
   }
   console.log('to be launched chromeExecutable = ', chromeExecutable);
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     dumpio: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
     executablePath: chromeExecutable, // this is temporary, should differentiate the running environment
