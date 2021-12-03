@@ -6,7 +6,7 @@ const fs = require('fs');
 // * [Done] randomize poll answer selection
 // * randomize wait time to simulate more natural user flow
 // * [Done] set up schedule to run the script
-// * support multi-account for max profit
+// * [Done] support multi-account for max profit
 //////////////////////////////////////////////////////////////////////
 
 // variable declaration
