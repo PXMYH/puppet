@@ -92,21 +92,6 @@ wheelSpin = async (url) => {
   await page.click(loginLinkSelector);
   await page.waitForTimeout(2000);
 
-  // To avoid the following error, we can't use page.keyboard.type()
-  //   /Users/runner/work/puppet/puppet/node_modules/puppeteer/lib/cjs/puppeteer/common/Input.js:222
-  //   for (const char of text) {
-  //                      ^
-  // TypeError: text is not iterable
-  // at Keyboard.type (/Users/runner/work/puppet/puppet/node_modules/puppeteer/lib/cjs/puppeteer/common/Input.js:222:28)
-  // at wheelSpin (/Users/runner/work/puppet/puppet/index.js:92:23)
-  // at processTicksAndRejections (node:internal/process/task_queues:96:5)
-  // at async /Users/runner/work/puppet/puppet/index.js:139:3
-  // error Command failed with exit code 1.
-  // await page.click(usernameSelector);
-  // await page.keyboard.type(loginUsername);
-  // await page.click(passwordSelector);
-  // await page.keyboard.type(loginPassword);
-
   // type in username and password
   console.log('loginUsername: ', loginUsername);
   console.log('loginPassword: ', loginPassword);
