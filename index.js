@@ -51,13 +51,8 @@ startBrowser = async () => {
       bundledChromiumFolder +
       '/chrome-mac/Chromium.app/Contents/MacOS/Chromium';
   } else if (process.platform === 'linux') {
-    // chromeExecutable = '/snap/bin/chromium';
-    // function getDirectories(path) {
-    //   return fs.readdirSync(path).filter(function (file) {
-    //     return fs.statSync(path + '/' + file).isDirectory();
-    //   });
-    // }
-    chromeExecutable = './node_modules/puppeteer/.local-chromium';
+    chromeExecutable =
+      basePath + bundledChromiumFolder + '/chrome-linux/chrome';
   } else {
     chromeExecutable = '/usr/bin/chromium';
   }
