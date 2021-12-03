@@ -26,13 +26,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew install yarn tree
+          brew install yarn
           yarn install
-
-      - name: verify
-        run: |
-          pwd
-          tree ./node_modules/puppeteer/.local-chromium
 
       - name: run wheel spin
         env:
