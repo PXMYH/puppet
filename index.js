@@ -10,6 +10,7 @@ const fs = require('fs');
 //////////////////////////////////////////////////////////////////////
 
 // variable declaration
+
 const loginLinkSelector =
   'body > div.container-fliud > div.dark > header > div:nth-child(2) > div.br-main-menu.float-right > ul > li:nth-child(2)';
 const usernameSelector = '#UserEmail';
@@ -52,7 +53,7 @@ startBrowser = async () => {
       '/chrome-mac/Chromium.app/Contents/MacOS/Chromium';
   } else if (process.platform === 'linux') {
     chromeExecutable =
-      basePath + bundledChromiumFolder + '/chrome-linux/chrome';
+      basePath + '/' + bundledChromiumFolder + '/chrome-linux/chrome';
   } else {
     chromeExecutable = '/usr/bin/chromium';
   }
