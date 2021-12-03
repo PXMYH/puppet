@@ -44,6 +44,7 @@ jobs:
           tree node_modules/puppeteer/.local-chromium
           cd node_modules/puppeteer/.local-chromium
           pwd
+          ls -ltr ./node_modules/puppeteer/.local-chromium/linux-938248/chrome-linux/chrome
 
       - name: run wheel spin
         uses: borales/actions-yarn@v2.3.0
