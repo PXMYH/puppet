@@ -19,7 +19,16 @@ jobs:
     # reference: https://stackoverflow.com/a/59310425/3763996
     strategy:
       matrix:
-        username: ['LOGIN_USERNAME1', 'LOGIN_USERNAME2', 'LOGIN_USERNAME3']
+        username:
+          [
+            'LOGIN_USERNAME1',
+            'LOGIN_USERNAME2',
+            'LOGIN_USERNAME3',
+            'LOGIN_USERNAME4',
+            'LOGIN_USERNAME5',
+            'LOGIN_USERNAME6',
+            'LOGIN_USERNAME7',
+          ]
         password: ['LOGIN_PASSWORD'] # use same password for now, this is because matrix will create jobs for ALL combinations if there are multiple values for password
 
     steps:
