@@ -15,6 +15,10 @@ jobs:
   build:
     #     runs-on: ubuntu-latest # figure out how to run on ubuntu later
     runs-on: macos-10.15
+    strategy:
+    matrix:
+      username: ['LOGIN_USERNAME1', 'LOGIN_USERNAME2']
+      password: ['LOGIN_PASSWORD1', 'LOGIN_PASSWORD2']
 
     steps:
       - uses: actions/checkout@v2
@@ -31,7 +35,7 @@ jobs:
 
       - name: run wheel spin
         env:
-          LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
-          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+          LOGIN_USERNAME: ${{ secrets[matrix.username] }}
+          LOGIN_PASSWORD: ${{ secrets[matrix.password] }}
         run: |
           yarn start
