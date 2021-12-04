@@ -7,9 +7,8 @@ const passwordSelector = '#id_password';
 const loginSubmitSelector = '#signin_btn > div';
 
 // get login username and password from environment variable
-const loginUsername = process.env.LOGIN_USERNAME;
-const loginPassword = process.env.LOGIN_PASSWORD;
-
+const loginUsername = process.env.LC_LOGIN_USERNAME;
+const loginPassword = process.env.LC_LOGIN_PASSWORD;
 startBrowser = async () => {
   // if in local, headless set to false, otherwise set to true
   let chromeExecutable = '';
