@@ -30,7 +30,7 @@ jobs:
           brew install yarn
           yarn install
 
-      - name: run wheel spin
+      - name: run get coin
         env:
           LOGIN_USERNAME: ${{ secrets.LC_LOGIN_USERNAME }}
           LOGIN_PASSWORD: ${{ secrets.LC_LOGIN_PASSWORD }}
