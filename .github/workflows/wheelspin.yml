@@ -18,6 +18,7 @@ jobs:
     # multi-account support
     # reference: https://stackoverflow.com/a/59310425/3763996
     strategy:
+      fail-fast: false
       matrix:
         username:
           [
