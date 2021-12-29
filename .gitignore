@@ -105,6 +105,6 @@ dist
 
 ## Custom
 .DS_Store
-secrets.js
+.env
 *.jpg
 *.png
