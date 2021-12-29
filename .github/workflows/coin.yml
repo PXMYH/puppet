@@ -32,7 +32,7 @@ jobs:
 
       - name: run get coin
         env:
-          LOGIN_USERNAME: ${{ secrets.LC_LOGIN_USERNAME }}
-          LOGIN_PASSWORD: ${{ secrets.LC_LOGIN_PASSWORD }}
+          LC_LOGIN_USERNAME: ${{ secrets.LC_LOGIN_USERNAME }}
+          LC_LOGIN_PASSWORD: ${{ secrets.LC_LOGIN_PASSWORD }}
         run: |
           yarn run lc
