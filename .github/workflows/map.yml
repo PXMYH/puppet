@@ -1,0 +1,35 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Show Me the Map
+
+on:
+  # Triggers daily
+  schedule:
+    - cron: '0 12 * * *' #runs at 17:00 UTC everyday (7pm ET)
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    #     runs-on: ubuntu-latest # figure out how to run on ubuntu later
+    runs-on: macos-10.15
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          brew install yarn
+          yarn install
+
+      - name: run get finviz map
+        run: |
+          yarn run map
