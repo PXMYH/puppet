@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "mintvine": "node mintvine.js",
-    "lc": "node lc.js"
+    "lc": "node lc.js",
+    "map": "node map.js"
   },
   "dependencies": {
     "puppeteer": "^12.0.1"
