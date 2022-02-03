@@ -13,8 +13,11 @@ const puppeteer = require('puppeteer');
 
 const finvizUrl = 'https://finviz.com/';
 const finvizMapUrl = 'https://finviz.com/map.ashx';
-const finvizMainPage = 'finviz-main.png';
-const finvizMapPage = 'finviz-map.png';
+
+const today = new Date().toISOString().slice(0, 10);
+
+const finvizMainPage = `finviz-main-${today}.png`;
+const finvizMapPage = `finviz-map-${today}.png`;
 
 startBrowser = async () => {
   // if in local, headless set to false, otherwise set to true
