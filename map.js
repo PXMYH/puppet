@@ -31,10 +31,12 @@ const uploadMap = async (filename) => {
   try {
     // authorize with provided credentials (authorization expires after 24 hours)
     const auth = await b2.authorize();
+    console.log('Authorization successful!');
 
     // get bucket Id
     const response = await b2.getBucket({ bucketName: b2BucketName });
     const bucketId = response.data.buckets[0].bucketId;
+    console.log(`Get bucket id: ${bucketId}`);
 
     // get upload url
     const result = await b2.getUploadUrl({
@@ -43,6 +45,7 @@ const uploadMap = async (filename) => {
     console.log('result = ', result);
     const uploadUrl = result.data.uploadUrl;
     const uploadAuthToken = result.data.authorizationToken;
+    console.log('');
 
     fs.readFile(filename, async (err, data) => {
       if (err) throw err;
