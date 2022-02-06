@@ -1,16 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-
-// (async () => {
-//   const browser = await puppeteer.launch({
-//     args: ['--no-sandbox', '--disable-setuid-sandbox'],
-//   });
-//   const page = await browser.newPage();
-//   await page.goto('https://buddy.works');
-//   await page.screenshot({ path: 'buddy-screenshot.png' });
-
-//   await browser.close();
-// })();
+const B2 = require('backblaze-b2');
 
 const finvizUrl = 'https://finviz.com/';
 const finvizMapUrl = 'https://finviz.com/map.ashx';
@@ -19,6 +9,57 @@ const today = new Date().toISOString().slice(0, 10);
 
 const finvizMainPage = `finviz-main-${today}.png`;
 const finvizMapPage = `finviz-map-${today}.png`;
+
+const b2BucketName = 'finvizMap';
+
+const b2ApplicationKeyId = process.env.MAP_B2_KEY_ID;
+const b2ApplicationKey = process.env.MAP_B2_APPLICATION_KEY;
+
+// create B2 object instance
+const b2 = new B2({
+  applicationKeyId: b2ApplicationKeyId,
+  applicationKey: b2ApplicationKey,
+  retry: {
+    retries: 3, // by default
+  },
+});
+
+const uploadMap = async (filename) => {
+  try {
+    // authorize with provided credentials (authorization expires after 24 hours)
+    const auth = await b2.authorize();
+
+    // get bucket Id
+    const response = await b2.getBucket({ bucketName: b2BucketName });
+    const bucketId = response.data.buckets[0].bucketId;
+
+    // get upload url
+    const result = await b2.getUploadUrl({
+      bucketId: bucketId,
+    });
+    console.log('result = ', result);
+    const uploadUrl = result.data.uploadUrl;
+    const uploadAuthToken = result.data.authorizationToken;
+
+    fs.readFile(filename, async (err, data) => {
+      if (err) throw err;
+      console.log('data to upload', data);
+      // upload file to remote bucket
+      console.log(`uploading ${filename}`);
+      await b2.uploadFile({
+        uploadUrl: uploadUrl,
+        uploadAuthToken: uploadAuthToken,
+        fileName: filename,
+        data: data,
+        onUploadProgress: (event) => {
+          console.log(`uploading ... ${event}`);
+        },
+      });
+    });
+  } catch (err) {
+    console.log('Error uploading file:', err);
+  }
+};
 
 startBrowser = async () => {
   // if in local, headless set to false, otherwise set to true
@@ -70,6 +111,9 @@ stockViz = async () => {
   await page.goto(finvizMapUrl, { waitUntil: 'load' });
   console.log('Finviz map page loaded');
   await page.screenshot({ path: finvizMapPage });
+
+  // upload maps
+  await uploadMap(finvizMainPage);
 
   await closeBrowser(browser);
 };
