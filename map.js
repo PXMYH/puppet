@@ -117,6 +117,7 @@ stockViz = async () => {
 
   // upload maps
   await uploadMap(finvizMainPage);
+  await uploadMap(finvizMapPage);
 
   await closeBrowser(browser);
 };
