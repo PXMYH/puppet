@@ -31,5 +31,8 @@ jobs:
           yarn install
 
       - name: run get finviz map
+        env:
+          MAP_B2_KEY_ID: ${{ secrets.MAP_B2_KEY_ID }}
+          MAP_B2_APPLICATION_KEY: ${{ secrets.MAP_B2_APPLICATION_KEY }}
         run: |
           yarn run map
