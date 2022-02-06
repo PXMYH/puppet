@@ -15,6 +15,9 @@ const b2BucketName = 'finvizMap';
 const b2ApplicationKeyId = process.env.MAP_B2_KEY_ID;
 const b2ApplicationKey = process.env.MAP_B2_APPLICATION_KEY;
 
+console.log('b2ApplicationKeyId = ', b2ApplicationKeyId);
+console.log('b2ApplicationKey = ', b2ApplicationKey);
+
 // create B2 object instance
 const b2 = new B2({
   applicationKeyId: b2ApplicationKeyId,
