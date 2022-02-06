@@ -40,8 +40,8 @@ jobs:
 
       - uses: yamatt/backblaze-b2-upload-action@v6
         with:
-          key_id: ${{ secrets.B2_KEY_ID }}
-          application_key: ${{ secrets.B2_APPLICATION_KEY }}
+          key_id: ${{ secrets.MAP_B2_KEY_ID }}
+          application_key: ${{ secrets.MAP_B2_APPLICATION_KEY }}
           bucket_name: finvizMap
           file_path: finviz-main-${{ steps.date.outputs.date }}.png
           remote_path: '.'
