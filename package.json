@@ -8,6 +8,7 @@
     "map": "node map.js"
   },
   "dependencies": {
+    "backblaze-b2": "^1.7.0",
     "puppeteer": "^12.0.1"
   }
 }
