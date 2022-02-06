@@ -42,10 +42,8 @@ const uploadMap = async (filename) => {
     const result = await b2.getUploadUrl({
       bucketId: bucketId,
     });
-    console.log('result = ', result);
     const uploadUrl = result.data.uploadUrl;
     const uploadAuthToken = result.data.authorizationToken;
-    console.log('');
 
     fs.readFile(filename, async (err, data) => {
       if (err) throw err;
