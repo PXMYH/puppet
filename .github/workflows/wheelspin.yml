@@ -35,6 +35,10 @@ jobs:
             'LOGIN_USERNAME11',
             'LOGIN_USERNAME12',
             'LOGIN_USERNAME13',
+            'LOGIN_USERNAME14',
+            'LOGIN_USERNAME15',
+            'LOGIN_USERNAME16',
+            'LOGIN_USERNAME17',
           ]
         password: ['LOGIN_PASSWORD'] # use same password for now, this is because matrix will create jobs for ALL combinations if there are multiple values for password
 
