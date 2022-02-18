@@ -6,7 +6,7 @@ name: Show Me the Map
 on:
   # Triggers daily
   schedule:
-    - cron: '0 12 * * *' #runs at 17:00 UTC everyday (7pm ET)
+    - cron: '0 22 * * *' #runs at 22:00 UTC everyday (5pm ET)
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
