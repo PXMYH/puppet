@@ -5,10 +5,13 @@
   "scripts": {
     "mintvine": "node mintvine.js",
     "lc": "node lc.js",
-    "map": "node map.js"
+    "map": "node map.js",
+    "floorplan": "node floorplan.js"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "backblaze-b2": "^1.7.0",
+    "node-html-parser": "^5.3.3",
     "puppeteer": "^13.5.2"
   }
 }
