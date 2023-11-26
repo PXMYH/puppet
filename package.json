@@ -9,7 +9,7 @@
     "floorplan": "node floorplan.js"
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.6.0",
     "backblaze-b2": "^1.7.0",
     "node-html-parser": "^5.3.3",
     "puppeteer": "^13.5.2"
